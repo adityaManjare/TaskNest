@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { user } from './user.entity';
+import { user } from '../entities/user.entity';
 import { Repository } from 'typeorm';
-import { userDto } from './auth.dto';
+
 import { JwtService } from '@nestjs/jwt';
+import { userDto } from './auth.dto';
 
 @Injectable()
 export class Authservice {
@@ -12,8 +13,16 @@ export class Authservice {
         private userRepository : Repository<user>,
         private jwtservice:JwtService ,
     ) {}
-    newuser(create:userDto){
-        return this.userRepository.save(create);
+  async  newuser(create:userDto){
+        const resultUser = await this.showbymail(create.username);
+        if(resultUser){
+                return 'account already exists please login here : http://localhost:3000/login';
+        }  
+        else {
+            return this.userRepository.save(create); 
+        }
+
+       
     }
     showbymail(username : string){
         return this.userRepository.findOne({where:{username}})
@@ -27,6 +36,10 @@ export class Authservice {
             return null;
         }
     }
+
+
+    
+    
     async payloader(user: any){
         const payload ={ username:user.username , id : user.id};
         return{

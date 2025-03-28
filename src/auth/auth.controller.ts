@@ -1,7 +1,8 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { userDto } from './auth.dto';
+
 import { Authservice } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
+import { userDto } from './auth.dto';
 
 @Controller()
 export class AuthController {
@@ -11,11 +12,12 @@ export class AuthController {
     async login(@Request() req:any){
         return this.authservice.payloader(req.user) ; 
     }
-
     @Post('/signup')
-    signup(@Body() rq: userDto){
+    signup(@Body() rq: userDto)
     {
             return this.authservice.newuser(rq) ; 
     }
-}
+    
+
+     
 }
