@@ -10,40 +10,37 @@ import { userDto } from './auth.dto';
 export class Authservice {
     constructor(
         @InjectRepository(user)
-        private userRepository : Repository<user>,
-        private jwtservice:JwtService ,
-    ) {}
-  async  newuser(create:userDto){
+        private userRepository: Repository<user>,
+        private jwtservice: JwtService,
+    ) { }
+    async newuser(create: userDto) {
         const resultUser = await this.showbymail(create.username);
-        if(resultUser){
-                return 'account already exists please login here : http://localhost:3000/login';
-        }  
+        if (resultUser) {
+            return 'account already exists please login here : http://localhost:3000/login';
+        }
         else {
-            return this.userRepository.save(create); 
+            return this.userRepository.save(create);
         }
 
-       
+
     }
-    showbymail(username : string){
-        return this.userRepository.findOne({where:{username}})
+    showbymail(username: string) {
+        return this.userRepository.findOne({ where: { username } })
     }
-    async validateUser(username:string, password:string) {
+    async validateUser(username: string, password: string) {
         const resultUser = await this.showbymail(username);
-        if(resultUser&&resultUser.password === password){
-                return resultUser;
-        }  
+        if (resultUser && resultUser.password === password) {
+            return resultUser;
+        }
         else {
             return null;
         }
     }
 
-
-    
-    
-    async payloader(user: any){
-        const payload ={ username:user.username , id : user.id};
-        return{
-           access_token : this.jwtservice.sign(payload)
+    async payloader(user: any) {
+        const payload = { username: user.username, id: user.id };
+        return {
+            access_token: this.jwtservice.sign(payload)
         };
     }
 
