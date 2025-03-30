@@ -1,14 +1,21 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, ParseIntPipe, Post, Req, UseGuards } from '@nestjs/common';
 import { userService } from './user.service';
 import { bodyDto } from './body.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { UserOwnerGuard } from './useridguard';
 
-@Controller()
+@Controller('/:userId')
 export class UserController {
     constructor(
         private userService : userService,
     ){}
+    @UseGuards(AuthGuard('jwt'),UserOwnerGuard)
     @Post('/create')
-    create(@Body() bodyDto : bodyDto ){
-        return this.userService.create(bodyDto)
+    create(@Body() rq: bodyDto,@Param('userId',ParseIntPipe) userId:number ){
+        const inputdto = {
+            id : userId, // well i dont know i'll extract user id from jwt / ig one way is in useridguard
+            task : rq.task
+        }
+        return this.userService.create(inputdto);
     }
 }

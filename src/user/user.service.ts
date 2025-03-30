@@ -11,7 +11,7 @@ export class userService {
         private userRepository: Repository<tasks>
 
     ) { }
-    create(bodyDto:bodyDto){
+    create(bodyDto:any){
      const inputDto = new tasks(); 
      inputDto.map_id= bodyDto.id;
      inputDto.task = bodyDto.task;

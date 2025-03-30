@@ -1,8 +1,6 @@
 import { IsEmail, IsInt,  IsString} from "class-validator";
 
-export class bodyDto{
-        @IsInt()
-        id : number;   
+export class bodyDto{   
         @IsString()
         task: string;
 }
