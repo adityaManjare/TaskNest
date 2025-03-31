@@ -13,7 +13,7 @@ export class UserController {
     @Post('/create')
     create(@Body() rq: bodyDto,@Param('userId',ParseIntPipe) userId:number ){
         const inputdto = {
-            id : userId, // well i dont know i'll extract user id from jwt / ig one way is in useridguard
+            id : userId, // well i dont know how i'll extract user id from jwt / ig one way is in useridguard
             task : rq.task
         }
         return this.userService.create(inputdto);
