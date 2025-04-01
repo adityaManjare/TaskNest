@@ -15,4 +15,3 @@ export class UserOwnerGuard implements CanActivate { // can activate khud ka gua
     }
 }
 
-// to ddo admin login 

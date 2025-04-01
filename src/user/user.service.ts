@@ -20,4 +20,12 @@ export class userService {
 
      return this.userRepository.save(inputDto);
     }
+    read(userId:number){
+        if(userId!==1){
+        return this.userRepository.findAndCount({where:{map_id:userId}});}
+        else{
+            return this.userRepository.findAndCount();
+        }
+    }
+
 }

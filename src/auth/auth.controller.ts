@@ -11,6 +11,7 @@ export class AuthController {
     @Post('/login')
     async login(@Request() req:any){
         return this.authservice.payloader(req.user) ; 
+        
     }
     @Post('/signup')
     signup(@Body() rq: userDto)
