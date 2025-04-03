@@ -1,8 +1,11 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, UseGuards } from '@nestjs/common';
 import { userService } from './user.service';
 import { bodyDto } from './body.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserOwnerGuard } from './useridguard';
+import { updateDto } from './update.dto';
+import { TaskEditGuard } from './taskIdguard';
+import { deleteDto } from './delete.dto';
 
 @Controller('/:userId')
 export class UserController {
@@ -19,8 +22,18 @@ export class UserController {
         return this.userService.create(inputdto);
     }
     @UseGuards(AuthGuard('jwt'),UserOwnerGuard)
-    @Get('/read')
+    @Get('/tasks')
     read(@Param('userId',ParseIntPipe) userId:number ){
         return this.userService.read(userId);
+    }
+    @UseGuards(AuthGuard('jwt'),UserOwnerGuard,TaskEditGuard)
+    @Post('/edit')
+    edit(@Body() dto: updateDto ,@Param('userId',ParseIntPipe) userId:number ){
+        return this.userService.edit(dto);
+    }
+    @UseGuards(AuthGuard('jwt'),UserOwnerGuard,TaskEditGuard)
+    @Delete('/delete')
+    delete(@Body() dto: deleteDto ,@Param('userId',ParseIntPipe) userId:number ){
+        return this.userService.delete(dto);
     }
 }

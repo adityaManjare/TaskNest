@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { tasks } from 'src/entities/tasks.entity';
 import { Repository } from 'typeorm';
 import { bodyDto } from './body.dto';
+import { updateDto } from './update.dto';
+import { deleteDto } from './delete.dto';
 
 @Injectable()
 export class userService {
@@ -27,5 +29,13 @@ export class userService {
             return this.userRepository.findAndCount();
         }
     }
+    edit(Dto:updateDto){
+        this.userRepository.update(Dto.taskId,{task:Dto.task});
+        return  this.userRepository.find({where:{taskid:Dto.taskId}});}
 
-}
+    delete(Dto:deleteDto){
+        this.userRepository.delete(Dto.taskId);
+        return 'task deleted';
+        }    }
+
+
