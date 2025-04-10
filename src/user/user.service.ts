@@ -36,6 +36,15 @@ export class userService {
     delete(Dto:deleteDto){
         this.userRepository.delete(Dto.taskId);
         return 'task deleted';
-        }    }
+        }
+    
+    //order assigner
+    
+
+    
+
+
+    }
+
 
 

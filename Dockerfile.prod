@@ -1,0 +1,11 @@
+FROM node:20
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm build
+RUN rm -rf ./src 
+EXPOSE 3000
+#equivalent to typing run start dev in terminal
+CMD ["npm","run","start:prod"]
+
+

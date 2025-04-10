@@ -1,0 +1,19 @@
+
+docker compose
+swagger
+
+//
+
+LLM 
+rag norag
+MCP
+
+//
+
+cursor 
+//
+
+ embeddings 
+ VECTORS
+ lambda index
+ 

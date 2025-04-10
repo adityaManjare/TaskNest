@@ -11,6 +11,7 @@ import { tasks } from './entities/tasks.entity';
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
+ 
     port: 3306,
     username: 'root',
     password: 'AKMxt@747',
