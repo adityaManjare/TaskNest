@@ -10,3 +10,7 @@ CMD ["npm","run","start:dev"]
 
 #   inside the docker container agar mai run karta hu aur yaha pe (app module host)local host hai to uska matlab ye hoga ki ye wo container ko refer karega
 # see database and your application/server runs on two containers(yes this tis very important for multiple reasons just gpt it) and therefor we run this on two container and these conatiner later connect so that your program can run : ) also make sure that connection stuffs of containers is written on .yaml files generally
+# docker-compose up --build to build all the containers and run them and start docker network
+#docker build -t tasknest-prod . to build an image
+# docker run -p <host_port>:<container_port> <image_name>  to run a particular image's container
+
