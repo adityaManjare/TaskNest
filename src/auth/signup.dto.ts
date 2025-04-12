@@ -1,27 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { IsEmail, isEmail, IsInt, isInt, IsString, isString } from "class-validator";
 
-@Entity()
-export class user{
-    @ApiProperty({
-        description: 'The id of the user',
-        example: '1'
-    })
-    @PrimaryGeneratedColumn() 
-    id: number;
-
+export class signupDto{
     @ApiProperty({
         description: 'The username of the user',
         example: 'aditya'
     })
-    @Column() 
+    @IsString() 
     username: string;
-
     @ApiProperty({
         description: 'The password of the user',
         example: '1'
     })
-    @Column()
     password: string;
-    
 }

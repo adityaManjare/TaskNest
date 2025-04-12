@@ -4,7 +4,7 @@ import { user } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 
 import { JwtService } from '@nestjs/jwt';
-import { userDto } from './auth.dto';
+import { signupDto } from './signup.dto';
 
 @Injectable()
 export class Authservice {
@@ -13,7 +13,7 @@ export class Authservice {
         private userRepository: Repository<user>,
         private jwtservice: JwtService,
     ) { }
-    async newuser(create: userDto) {
+    async newuser(create: signupDto) {
         const resultUser = await this.showbymail(create.username);
         if (resultUser) {
             return 'account already exists please login here : http://localhost:3000/login';
