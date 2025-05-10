@@ -6,9 +6,11 @@ import { UserOwnerGuard } from './useridguard';
 import { updateDto } from './update.dto';
 import { TaskEditGuard } from './taskIdguard';
 import { deleteDto } from './delete.dto';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse,ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { tasks } from 'src/entities/tasks.entity';
+
 @ApiTags('manage tasks')
+@ApiBearerAuth('access-token')
 @Controller('/:userId')
 export class UserController {
     constructor(
@@ -19,6 +21,7 @@ export class UserController {
         description: 'Returns the created task',
         type: tasks
     })  
+   
     @Post('/create')
     create(@Body() rq: bodyDto,@Param('userId',ParseIntPipe) userId:number ){
         const inputdto = {

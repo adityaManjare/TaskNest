@@ -16,8 +16,8 @@ export class AuthController {
        
     })
     @Post('/login')
-    async login(@Body() req:loginDto){
-        return this.authservice.payloader(user) ; //ye user ko maine local strategy se uthaya hai
+    async login(@Body() req:loginDto,@Request() reqq){
+        return this.authservice.payloader(reqq.user) ; //ye user ko maine local strategy se uthaya hai
         
     }
     @ApiCreatedResponse({

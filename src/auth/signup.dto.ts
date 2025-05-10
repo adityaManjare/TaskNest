@@ -8,6 +8,7 @@ export class signupDto{
     })
     @IsString() 
     username: string;
+    @IsString() 
     @ApiProperty({
         description: 'The password of the user',
         example: '1'
